@@ -12,7 +12,7 @@ const componentToNode = (component: Component, settings: Settings): yoga.NodeIns
   const style = hasStyle ? styleFromComponent(component) : {}
 
   if (hasStyle) {
-    // http://facebook.github.io/react-native/releases/0.44/docs/layout-props.html
+    // http://facebook.github.io/react-native/releases/0.49/docs/layout-props.html
 
     if (isNotEmpty(style.width)) { node.setWidth(style.width) }
     if (isNotEmpty(style.height)) { node.setHeight(style.height) }
@@ -58,12 +58,26 @@ const componentToNode = (component: Component, settings: Settings): yoga.NodeIns
     if (isNotEmpty(style.right)) { node.setPosition(yoga.EDGE_RIGHT, style.right) }
     if (isNotEmpty(style.bottom)) { node.setPosition(yoga.EDGE_BOTTOM, style.bottom) }
 
+    if (isNotEmpty(style.aspectRatio)) { node.setAspectRatio(style.aspectRatio) }
+
+    const display = style.display
+    if (display) {
+      if (display === "flex") { node.setDisplay(yoga.DISPLAY_FLEX) }
+      if (display === "none") { node.setDisplay(yoga.DISPLAY_NONE) }
+    }
+
     const flexDirection = style.flexDirection
     if (flexDirection) {
       if (flexDirection === "row") { node.setFlexDirection(yoga.FLEX_DIRECTION_ROW) }
       if (flexDirection === "column") { node.setFlexDirection(yoga.FLEX_DIRECTION_COLUMN) }
       if (flexDirection === "row-reverse") { node.setFlexDirection(yoga.FLEX_DIRECTION_ROW_REVERSE) }
       if (flexDirection === "column-reverse") { node.setFlexDirection(yoga.FLEX_DIRECTION_COLUMN_REVERSE) }
+    }
+
+    const flexWrap = style.flexWrap
+    if (flexWrap) {
+      if (flexWrap === "wrap") { node.setFlexWrap(yoga.WRAP_WRAP) }
+      if (flexWrap === "nowrap") { node.setFlexWrap(yoga.WRAP_NO_WRAP) }
     }
 
     const justifyContent = style.justifyContent
@@ -73,6 +87,16 @@ const componentToNode = (component: Component, settings: Settings): yoga.NodeIns
       if (justifyContent === "center") { node.setJustifyContent(yoga.JUSTIFY_CENTER) }
       if (justifyContent === "space-between") { node.setJustifyContent(yoga.JUSTIFY_SPACE_BETWEEN) }
       if (justifyContent === "space-around") { node.setJustifyContent(yoga.JUSTIFY_SPACE_AROUND) }
+    }
+
+    const alignContent = style.alignContent
+    if (alignContent) {
+      if (alignContent === "flex-start") { node.setAlignContent(yoga.ALIGN_FLEX_START) }
+      if (alignContent === "flex-end") { node.setAlignContent(yoga.ALIGN_FLEX_END) }
+      if (alignContent === "center") { node.setAlignContent(yoga.ALIGN_CENTER) }
+      if (alignContent === "stretch") { node.setAlignContent(yoga.ALIGN_STRETCH) }
+      if (alignContent === "space-between") { node.setAlignContent(yoga.ALIGN_SPACE_BETWEEN) }
+      if (alignContent === "space-around") { node.setAlignContent(yoga.ALIGN_SPACE_AROUND) }
     }
 
     const alignItems = style.alignItems
@@ -92,6 +116,13 @@ const componentToNode = (component: Component, settings: Settings): yoga.NodeIns
       if (alignSelf === "center") { node.setAlignSelf(yoga.ALIGN_CENTER) }
       if (alignSelf === "stretch") { node.setAlignSelf(yoga.ALIGN_STRETCH) }
       if (alignSelf === "baseline") { node.setAlignSelf(yoga.ALIGN_BASELINE) }
+    }
+
+    const overflow = style.overflow
+    if (overflow) {
+      if (overflow === "visible") { node.setOverflow(yoga.OVERFLOW_VISIBLE) }
+      if (overflow === "hidden") { node.setOverflow(yoga.OVERFLOW_HIDDEN) }
+      if (overflow === "scroll") { node.setOverflow(yoga.OVERFLOW_SCROLL) }
     }
   }
 
