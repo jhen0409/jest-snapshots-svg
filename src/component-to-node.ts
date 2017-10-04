@@ -101,7 +101,7 @@ const componentToNode = (component: Component, settings: Settings): yoga.NodeIns
 
     const alignItems = style.alignItems
     if (alignItems) {
-      if (alignItems === "flex-start") { node.setAlignItems(yoga.ALIGN_FLEX_END) }
+      if (alignItems === "flex-start") { node.setAlignItems(yoga.ALIGN_FLEX_START) }
       if (alignItems === "flex-end") { node.setAlignItems(yoga.ALIGN_FLEX_END) }
       if (alignItems === "center") { node.setAlignItems(yoga.ALIGN_CENTER) }
       if (alignItems === "stretch") { node.setAlignItems(yoga.ALIGN_STRETCH) }
@@ -111,7 +111,7 @@ const componentToNode = (component: Component, settings: Settings): yoga.NodeIns
     // TODO: De-dupe with above
     const alignSelf = style.alignSelf
     if (alignSelf) {
-      if (alignSelf === "flex-start") { node.setAlignSelf(yoga.ALIGN_FLEX_END) }
+      if (alignSelf === "flex-start") { node.setAlignSelf(yoga.ALIGN_FLEX_START) }
       if (alignSelf === "flex-end") { node.setAlignSelf(yoga.ALIGN_FLEX_END) }
       if (alignSelf === "center") { node.setAlignSelf(yoga.ALIGN_CENTER) }
       if (alignSelf === "stretch") { node.setAlignSelf(yoga.ALIGN_STRETCH) }
